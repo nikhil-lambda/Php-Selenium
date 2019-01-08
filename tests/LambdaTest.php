@@ -38,6 +38,7 @@ class LambdaTest{
 		self::$driver = RemoteWebDriver::create($url, $desired_capabilities); 		
 				
 		$itemName = 'Yey, Lets add it to list';
+	        sleep(10);
         self::$driver->get("https://4dvanceboy.github.io/lambdatest/lambdasampleapp.html");
         $element1 = self::$driver->findElement(WebDriverBy::name("li1"));
 		$element1->click();

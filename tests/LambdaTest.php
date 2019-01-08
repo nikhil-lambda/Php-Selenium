@@ -12,10 +12,13 @@ $GLOBALS['LT_BROWSER'] = getenv('LT_BROWSER');
 if(!$GLOBALS['LT_BROWSER']) $GLOBALS['LT_BROWSER'] = "chrome";
 
 $GLOBALS['LT_BROWSER_VERSION'] = getenv('LT_BROWSER_VERSION');
-if(!$GLOBALS['LT_BROWSER_VERSION']) $GLOBALS['LT_BROWSER_VERSION'] ="63.0";
+if(!$GLOBALS['LT_BROWSER_VERSION']) $GLOBALS['LT_BROWSER_VERSION'] ="67.0";
 
 $GLOBALS['LT_OPERATING_SYSTEM'] = getenv('LT_OPERATING_SYSTEM');
 if(!$GLOBALS['LT_OPERATING_SYSTEM']) $GLOBALS['LT_OPERATING_SYSTEM'] = "win10";
+
+
+$GLOBALS['LT_TUNNEL_IDENTIFIER'] = getenv('LT_TUNNEL_IDENTIFIER'); 
 
 class LambdaTest{
 	
@@ -34,11 +37,19 @@ class LambdaTest{
 		$desired_capabilities->setCapability('visual', true);
 		$desired_capabilities->setCapability('video ', true);
 		$desired_capabilities->setCapability('console', true);
+
+		if(!empty($GLOBALS['LT_TUNNEL_IDENTIFIER'])){
+			echo "Initializing remote web driver,  tunnel Identifier : ".$GLOBALS['LT_TUNNEL_IDENTIFIER']."\n";
+			$desired_capabilities->setCapability('tunnel', true);
+			// $desired_capabilities->setCapability('tunnelIdentifier', $GLOBALS['LT_TUNNEL_IDENTIFIER']);
+		}else{
+			echo "Initializing remote web driver.\n";
+		}
 		
 		self::$driver = RemoteWebDriver::create($url, $desired_capabilities); 		
 				
 		$itemName = 'Yey, Lets add it to list';
-	        sleep(10);
+	    sleep(10);
         self::$driver->get("https://4dvanceboy.github.io/lambdatest/lambdasampleapp.html");
         $element1 = self::$driver->findElement(WebDriverBy::name("li1"));
 		$element1->click();

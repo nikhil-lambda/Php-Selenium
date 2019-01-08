@@ -31,8 +31,8 @@ class LambdaTest{
 		$desired_capabilities->setCapability('browserName',$GLOBALS['LT_BROWSER']);
 		$desired_capabilities->setCapability('version', $GLOBALS['LT_BROWSER_VERSION']);
 		$desired_capabilities->setCapability('platform', $GLOBALS['LT_OPERATING_SYSTEM']);
-		$desired_capabilities->setCapability('name', "PHPTestSample");
-		$desired_capabilities->setCapability('build', "LambdaTestSampleApp");
+		$desired_capabilities->setCapability('name', "PHP Sample Demo");
+		$desired_capabilities->setCapability('build', "LambdaTest Demo Sample");
 		$desired_capabilities->setCapability('network', true);
 		$desired_capabilities->setCapability('visual', true);
 		$desired_capabilities->setCapability('video ', true);

@@ -37,11 +37,13 @@ class LambdaTest{
 		$desired_capabilities->setCapability('visual', true);
 		$desired_capabilities->setCapability('video ', true);
 		$desired_capabilities->setCapability('console', true);
+		$url = "https://4dvanceboy.github.io/lambdatest/lambdasampleapp.html";
 
 		if(!empty($GLOBALS['LT_TUNNEL_IDENTIFIER'])){
+			$url = "http://localhost:2000/";
 			echo "Initializing remote web driver,  tunnel Identifier : ".$GLOBALS['LT_TUNNEL_IDENTIFIER']."\n";
 			$desired_capabilities->setCapability('tunnel', true);
-			// $desired_capabilities->setCapability('tunnelIdentifier', $GLOBALS['LT_TUNNEL_IDENTIFIER']);
+			$desired_capabilities->setCapability('tunnelIdentifier', $GLOBALS['LT_TUNNEL_IDENTIFIER']);
 		}else{
 			echo "Initializing remote web driver.\n";
 		}
@@ -49,8 +51,9 @@ class LambdaTest{
 		self::$driver = RemoteWebDriver::create($url, $desired_capabilities); 		
 				
 		$itemName = 'Yey, Lets add it to list';
-	    sleep(10);
-        self::$driver->get("https://4dvanceboy.github.io/lambdatest/lambdasampleapp.html");
+		sleep(10);
+
+        self::$driver->get($url);
         $element1 = self::$driver->findElement(WebDriverBy::name("li1"));
 		$element1->click();
 			
